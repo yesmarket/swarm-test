@@ -1,0 +1,4 @@
+http_proxy=":proxy/"
+https_proxy=":proxy/"
+ftp_proxy=":proxy/"
+no_proxy="localhost,127.0.0.1"
