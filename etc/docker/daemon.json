@@ -1,0 +1,8 @@
+{
+    "hosts": [
+        "unix://",
+        "tcp://0.0.0.0:2376"
+    ],
+    "experimental": true,
+    "debug": true
+}
