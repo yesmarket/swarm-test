@@ -1,0 +1,7 @@
+NM_CONTROLLED=no
+BOOTPROTO=static
+ONBOOT=yes
+IPADDR=:ip
+NETMASK=:netmask
+DEVICE=:device
+PEERDNS=no

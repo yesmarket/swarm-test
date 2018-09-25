@@ -13,17 +13,18 @@ Vagrant.configure(2) do |config|
          guest.vm.hostname = node[:name]
          guest.vm.synced_folder '.', '/vagrant', type: 'rsync'
 
-         guest.vm.provider 'virtualbox' do |vb|
+            config.vm.provider 'hyperv' do |hv|
 
-            guest.vm.network 'private_network', ip: node[:ip], :netmask => node[:netmask], auto_config: true
-            guest.vm.provision :shell, :path => 'provision/proxy.sh', :args => "'#{ENV['HTTP_PROXY']}'", privileged: true
-            guest.vm.provision :shell, :path => 'provision/node.sh', privileged: true
+               guest.vm.network 'public_network', bridge: 'Vagrant Switch'
+               guest.vm.provision :shell, :path => 'provision/networking.sh', :args => "'#{node[:ip]}' '#{node[:netmask]}' 'eth0'", privileged: true
+               guest.vm.provision :shell, :path => 'provision/proxy.sh', :args => "'#{ENV['HTTP_PROXY']}'", privileged: true
+               guest.vm.provision :shell, :path => 'provision/node.sh', privileged: true
 
-            vb.name = node[:name]
-            vb.memory = node[:memory]
-            vb.cpus = node[:cpus]
+               hv.vmname = node[:name]
+               hv.memory = node[:memory]
+               hv.cpus = node[:cpus]
 
-         end
+            end
 
       end
 
